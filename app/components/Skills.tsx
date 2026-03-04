@@ -3,15 +3,15 @@ import { motion, Variants } from 'framer-motion'
 
 export default function Skills() {
   const techStacks = [
-    { name: "Next.js", level: "Advanced", icon: "https://cdn.simpleicons.org/nextdotjs/000000/white", color: "hover:border-white" },
-    { name: "Laravel", level: "Expert", icon: "https://cdn.simpleicons.org/laravel/FF2D20", color: "hover:border-[#FF2D20]" },
-    { name: "React", level: "Advanced", icon: "https://cdn.simpleicons.org/react/61DAFB", color: "hover:border-[#61DAFB]" },
-    { name: "PHP", level: "Expert", icon: "https://cdn.simpleicons.org/php/777BB4", color: "hover:border-[#777BB4]" },
-    { name: "Tailwind CSS", level: "Expert", icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4", color: "hover:border-[#06B6D4]" },
-    { name: "Alpine.js", level: "Intermediate", icon: "https://cdn.simpleicons.org/alpinedotjs/8BC0D0", color: "hover:border-[#8BC0D0]" },
-    { name: "MySQL", level: "Advanced", icon: "https://cdn.simpleicons.org/mysql/4479A1", color: "hover:border-[#4479A1]" },
-    { name: "JavaScript", level: "Advanced", icon: "https://cdn.simpleicons.org/javascript/F7DF1E", color: "hover:border-[#F7DF1E]" },
-  ]
+  { name: "Next.js", level: "Advanced", icon: "https://cdn.simpleicons.org/nextdotjs/000000/white", color: "hover:border-white" },
+  { name: "Laravel", level: "Expert", icon: "https://cdn.simpleicons.org/laravel/FF2D20", color: "hover:border-[#FF2D20]" },
+  { name: "React", level: "Advanced", icon: "https://cdn.simpleicons.org/react/61DAFB", color: "hover:border-[#61DAFB]" },
+  { name: "PHP", level: "Expert", icon: "https://cdn.simpleicons.org/php/777BB4", color: "hover:border-[#777BB4]" },
+  { name: "Tailwind CSS", level: "Expert", icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4", color: "hover:border-[#06B6D4]" },
+  { name: "Livewire", level: "Advanced", icon: "https://cdn.simpleicons.org/livewire/FB70A9", color: "hover:border-[#FB70A9]" }, // Ganti Alpine ke sini
+  { name: "MySQL", level: "Advanced", icon: "https://cdn.simpleicons.org/mysql/4479A1", color: "hover:border-[#4479A1]" },
+  { name: "JavaScript", level: "Advanced", icon: "https://cdn.simpleicons.org/javascript/F7DF1E", color: "hover:border-[#F7DF1E]" },
+]
 
   const fullSectionVariants: Variants = {
     hidden: { opacity: 0, y: 50 },

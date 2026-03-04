@@ -96,7 +96,7 @@ export default function Hero() {
             onClick={(e) => handleScroll(e, '#projects')}
             className="group relative bg-slate-950 dark:bg-white text-white dark:text-black px-10 py-4 rounded-full font-bold overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-slate-950/20 cursor-pointer"
           >
-            <span className="relative z-10 text-sm uppercase tracking-widest">Lihat Proyek</span>
+            <span className="relative z-10 text-sm uppercase tracking-widest">Lihat Project</span>
             <div className="absolute inset-0 bg-slate-800 dark:bg-slate-200 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
           </a>
 
