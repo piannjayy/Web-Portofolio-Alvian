@@ -16,6 +16,22 @@ export default function Navbar() {
     }
   }, [isOpen])
 
+  // FUNGSI SAKTI: Scroll tanpa nambahin hashtag di URL
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const elem = document.getElementById(targetId);
+    
+    if (elem) {
+      elem.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+    
+    // Tutup menu mobile kalau lagi kebuka
+    if (isOpen) setIsOpen(false);
+  };
+
   const menuItems = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
@@ -34,15 +50,26 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="w-32 flex-shrink-0">
-            <Link href="#home" className="text-xl font-black tracking-tighter text-slate-950 dark:text-white uppercase group flex items-center">
+            {/* Logo juga kita kasih handleScroll biar URL balik bersih */}
+            <a 
+              href="#home" 
+              onClick={(e) => handleScroll(e, '#home')}
+              className="text-xl font-black tracking-tighter text-slate-950 dark:text-white uppercase group flex items-center cursor-pointer"
+            >
               AV.DEV<span className="text-slate-500 group-hover:text-slate-950 dark:group-hover:text-slate-400 transition-colors">.</span>
-            </Link>
+            </a>
           </div>
 
+          {/* Desktop Menu */}
           <div className="hidden md:flex flex-grow justify-center">
             <div className="flex items-center gap-10">
               {menuItems.map((item) => (
-                <a key={item.name} href={item.href} className="text-[11px] uppercase tracking-[0.25em] font-black text-slate-500 hover:text-slate-950 dark:text-slate-500 dark:hover:text-white transition-all relative group">
+                <a 
+                  key={item.name} 
+                  href={item.href} 
+                  onClick={(e) => handleScroll(e, item.href)}
+                  className="text-[11px] uppercase tracking-[0.25em] font-black text-slate-500 hover:text-slate-950 dark:text-slate-500 dark:hover:text-white transition-all relative group cursor-pointer"
+                >
                   {item.name}
                   <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-slate-950 dark:bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
@@ -71,7 +98,6 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            // z-[100] PASTI di atas Hero dan Nav
             className="fixed inset-0 bg-[#e2e8f0] dark:bg-[#0a0a0a] z-[100] flex flex-col"
           >
             <div className="flex flex-col h-full p-10 pt-32 max-w-7xl mx-auto w-full">
@@ -91,8 +117,9 @@ export default function Navbar() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    onClick={() => setIsOpen(false)}
-                    className="group flex items-center justify-between py-4 border-b border-slate-200 dark:border-white/5"
+                    // Pakai handleScroll juga di mobile menu
+                    onClick={(e) => handleScroll(e, item.href)}
+                    className="group flex items-center justify-between py-4 border-b border-slate-200 dark:border-white/5 cursor-pointer"
                   >
                     <div className="flex items-baseline gap-4">
                       <span className="text-xs font-black text-slate-400">0{i + 1}</span>
