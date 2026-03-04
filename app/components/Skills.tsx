@@ -13,7 +13,6 @@ export default function Skills() {
     { name: "JavaScript", level: "Advanced", icon: "https://cdn.simpleicons.org/javascript/F7DF1E", color: "hover:border-[#F7DF1E]" },
   ]
 
-  // Tambahkan ": Variants" untuk mendefinisikan tipe data di TSX
   const fullSectionVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { 
@@ -21,7 +20,6 @@ export default function Skills() {
       y: 0,
       transition: {
         duration: 0.8,
-        // Tambahkan "as const" agar TS tidak menganggap ini cuma number[] biasa
         ease: [0.16, 1, 0.3, 1] as const, 
         staggerChildren: 0.1
       }
@@ -40,7 +38,7 @@ export default function Skills() {
   }
 
   return (
-    <section id="skills" className="py-32 px-6 bg-[#e2e8f0] dark:bg-[#0a0a0a] transition-colors duration-500 overflow-hidden">
+    <section id="skills" className="py-24 md:py-32 px-6 bg-[#e2e8f0] dark:bg-[#0a0a0a] transition-colors duration-500 overflow-hidden">
       <motion.div 
         className="max-w-6xl mx-auto"
         initial="hidden"
@@ -49,44 +47,48 @@ export default function Skills() {
         variants={fullSectionVariants}
       >
         
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-          <div className="space-y-4">
-            <h2 className="text-sm uppercase tracking-[0.5em] font-black text-slate-500 dark:text-slate-500">
+        {/* Header Section - Mobile Optimized */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <div className="space-y-4 w-full md:w-auto">
+            <h2 className="text-[10px] md:text-sm uppercase tracking-[0.5em] font-black text-slate-500">
               Expertise
             </h2>
             <h3 className="text-4xl md:text-6xl font-black text-slate-950 dark:text-white uppercase tracking-tighter leading-none">
               Tech <span className="text-slate-400 dark:text-slate-700">Stack.</span>
             </h3>
           </div>
-          <p className="max-w-xs text-slate-500 dark:text-slate-400 font-medium text-sm md:text-right leading-relaxed">
-            Teknologi modern yang saya gunakan untuk mengubah ide menjadi produk digital yang scalable.
-          </p>
+          
+          {/* Deskripsi: Rata kanan di semua ukuran layar (text-right) */}
+          <div className="w-full md:w-auto flex justify-end">
+            <p className="max-w-[240px] md:max-w-xs text-slate-500 dark:text-slate-400 font-medium text-xs md:text-sm text-right leading-relaxed border-r-2 border-slate-300 dark:border-slate-800 pr-4 md:pr-0 md:border-r-0">
+              Teknologi modern yang saya gunakan untuk membangun produk digital yang <span className="text-slate-950 dark:text-white">scalable</span>.
+            </p>
+          </div>
         </div>
 
-        {/* Grid Skills */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Grid Skills - Tetap 2 kolom di mobile agar tidak terlalu sempit */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
           {techStacks.map((tech) => (
             <motion.div 
               key={tech.name} 
               variants={cardVariants}
               whileHover={{ y: -8 }}
-              className={`group relative p-8 bg-white/50 dark:bg-white/5 backdrop-blur-sm border border-slate-300 dark:border-white/10 rounded-3xl transition-all duration-500 ${tech.color}`}
+              className={`group relative p-6 md:p-8 bg-white/50 dark:bg-white/5 backdrop-blur-sm border border-slate-300 dark:border-white/10 rounded-2xl md:rounded-3xl transition-all duration-500 ${tech.color}`}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-slate-200/50 dark:to-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-slate-200/50 dark:to-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl md:rounded-3xl" />
 
-              <div className="relative z-10 flex flex-col items-start gap-6">
-                <div className="w-12 h-12 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">
+              <div className="relative z-10 flex flex-col items-start gap-4 md:gap-6">
+                <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">
                   <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
                 </div>
 
                 <div className="space-y-1">
-                  <h4 className="font-black text-slate-950 dark:text-white uppercase tracking-tight text-lg">
+                  <h4 className="font-black text-slate-950 dark:text-white uppercase tracking-tight text-md md:text-lg">
                     {tech.name}
                   </h4>
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700 group-hover:bg-slate-950 dark:group-hover:bg-white transition-colors" />
-                    <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">
+                    <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-slate-300 dark:bg-slate-700 group-hover:bg-slate-950 dark:group-hover:bg-white transition-colors" />
+                    <p className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">
                       {tech.level}
                     </p>
                   </div>
