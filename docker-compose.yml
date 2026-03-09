@@ -1,0 +1,20 @@
+services:
+  porto-pian:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: porto-pian
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=3093
+    ports:
+      - "3093:3093"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 256M

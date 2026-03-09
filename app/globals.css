@@ -3,6 +3,20 @@
 /* Deteksi Dark Mode untuk Tailwind v4 */
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  /* Register font variable untuk Tailwind v4 */
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  
+  /* Palette Slate & Steel kamu */
+  --color-primary-dark: #27374D;
+  --color-primary-steel: #526D82;
+  --color-primary-muted: #9DB2BF;
+  --color-primary-light: #DDE6ED;
+
+  --color-background: #e2e8f0; 
+  --color-foreground: #020617;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -10,23 +24,15 @@
   }
 
   body {
-    @apply transition-colors duration-500 antialiased;
-    /* Efek Mesh Gradient tipis untuk mode terang agar tidak flat */
+    @apply transition-colors duration-500 antialiased font-sans; /* Tambah font-sans di sini */
     background-image: radial-gradient(at 0% 0%, rgba(226, 232, 240, 0.5) 0, transparent 50%), 
                       radial-gradient(at 100% 0%, rgba(203, 213, 225, 0.3) 0, transparent 50%);
   }
 }
 
-@theme {
-  /* Ganti ke Slate-200 biar lebih gelap dikit dan gak silau */
-  --color-background: #e2e8f0; 
-  --color-foreground: #020617;
-}
-
 :root {
-  /* Warna "Ghost White" yang lebih dapet abu-abunya */
   background-color: #e2e8f0; 
-  color: #020617; /* Biru gelap banget, hampir hitam */
+  color: #020617;
 }
 
 .dark {
@@ -36,14 +42,10 @@
 }
 
 /* Scrollbar Estetik */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1; /* Slate-300 untuk light mode */
+  background: #cbd5e1;
   border-radius: 10px;
   border: 2px solid transparent;
   background-clip: content-box;
@@ -52,8 +54,4 @@
 .dark ::-webkit-scrollbar-thumb {
   background: #222;
   border: 2px solid #0a0a0a;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #333;
 }

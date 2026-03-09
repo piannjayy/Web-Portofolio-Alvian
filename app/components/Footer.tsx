@@ -1,87 +1,96 @@
 'use client'
 import { motion, Variants } from 'framer-motion'
 
-export default function Footer() {
-  const currentYear = new Date().getFullYear();
+const gridBg = {
+  backgroundImage: `
+    linear-gradient(rgba(82,109,130,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(82,109,130,0.06) 1px, transparent 1px)
+  `,
+  backgroundSize: '64px 64px',
+}
 
-  // Definisi Variants dengan tipe data yang ketat untuk TypeScript
+const socials = [
+  { name: "GitHub",    link: "https://github.com/piannjayy"                          },
+  { name: "Instagram", link: "https://www.instagram.com/alviananw"                  },
+  { name: "LinkedIn",  link: "https://www.linkedin.com/in/alvian-aditya-75970a3b4/" },
+]
+
+export default function Footer() {
+  const currentYear = new Date().getFullYear()
+
   const footerVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { 
-        duration: 0.6, 
-        ease: "easeOut" as const // "as const" untuk fix error easing string
-      } 
-    }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } },
   }
 
   return (
-    <footer className="py-10 border-t border-slate-200 dark:border-white/5 bg-white dark:bg-[#0a0a0a] transition-colors duration-500 overflow-hidden">
-      <motion.div 
-        className="max-w-6xl mx-auto px-6"
+    <footer className="relative border-t border-[#526D82]/15 dark:border-[#9DB2BF]/10 bg-[#e2e8f0] dark:bg-[#1e2d3d] transition-colors duration-500 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none" style={gridBg} />
+      <div className="absolute bottom-0 left-0 w-[30%] h-full bg-gradient-to-tr from-[#526D82]/[0.04] to-transparent pointer-events-none" />
+
+      <motion.div
+        className="relative z-10 max-w-6xl mx-auto px-6 py-8"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={footerVariants}
       >
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4">
-          
-          {/* Brand & Role */}
+
+          {/* Brand */}
           <div className="group cursor-default">
-            <h2 className="font-black text-xl tracking-tighter text-slate-950 dark:text-white uppercase leading-none group-hover:tracking-normal transition-all duration-500">
-              AV.DEV<span className="text-slate-500 group-hover:text-slate-950 dark:group-hover:text-slate-400 transition-colors">.</span>
+            <h2 className="font-black text-xl tracking-tighter text-[#27374D] dark:text-[#DDE6ED] uppercase leading-none group-hover:tracking-normal transition-all duration-500">
+              AV.DEV<span className="text-[#526D82]/50 group-hover:text-[#526D82] dark:group-hover:text-[#9DB2BF] transition-colors duration-300">.</span>
             </h2>
             <div className="flex items-center gap-2 mt-2">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-slate-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
               </span>
-              <p className="text-[9px] text-slate-500 dark:text-slate-400 font-black uppercase tracking-[0.2em]">
+              <p className="text-[9px] text-[#526D82]/60 dark:text-[#9DB2BF]/50 font-black uppercase tracking-[0.3em]">
                 Fullstack Web Developer
               </p>
             </div>
           </div>
-          
+
           {/* Social Links */}
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.2em] font-black">
-            {[
-              { name: "GitHub", link: "https://github.com/piannjayy" },
-              { name: "Instagram", link: "https://www.instagram.com/alviananw" },
-              { name: "LinkedIn", link: "https://www.linkedin.com/in/alvian-aditya-75970a3b4/ " }
-            ].map((social) => (
-              <motion.a 
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            {socials.map((social) => (
+              <motion.a
                 key={social.name}
-                href={social.link} 
-                target="_blank" 
+                href={social.link}
+                target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -2 }}
-                className="text-slate-400 hover:text-black dark:hover:text-white transition-colors relative group py-1"
+                className="group relative text-[10px] uppercase tracking-[0.25em] font-black
+                  text-[#526D82]/50 dark:text-[#9DB2BF]/40
+                  hover:text-[#526D82] dark:hover:text-[#9DB2BF]
+                  transition-colors duration-300 py-1"
               >
                 {social.name}
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black dark:bg-white group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-px bg-[#526D82]/50 dark:bg-[#9DB2BF]/40 group-hover:w-full transition-all duration-400" />
               </motion.a>
             ))}
           </div>
 
-          {/* Copyright & Location */}
-          <div className="flex flex-col md:items-end gap-1 text-[9px] font-bold uppercase">
-            <p className="tracking-[0.15em] text-slate-400">
+          {/* Copyright */}
+          <div className="flex flex-col md:items-end gap-1">
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#526D82]/50 dark:text-[#9DB2BF]/40">
               © {currentYear} • Alvian Aditya
             </p>
-            <p className="tracking-[0.3em] text-slate-300 dark:text-slate-800 font-black">
-              Tumpang, Malang
+            <p className="text-[9px] font-black uppercase tracking-[0.35em] text-[#526D82]/30 dark:text-[#9DB2BF]/25">
+              Malang, ID
             </p>
           </div>
         </div>
 
-        {/* Bottom Decorative Line */}
-        <motion.div 
+        {/* Bottom line */}
+        <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="mt-8 h-[1px] w-full bg-gradient-to-r from-transparent via-slate-200 dark:via-white/5 to-transparent"
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-8 h-px w-full bg-gradient-to-r from-transparent via-[#526D82]/20 dark:via-[#9DB2BF]/10 to-transparent origin-left"
         />
       </motion.div>
     </footer>

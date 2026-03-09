@@ -1,0 +1,7 @@
+:80 {
+    reverse_proxy localhost:3093
+}
+
+alvian-aditya.my.id {
+    reverse_proxy localhost:3093
+}
