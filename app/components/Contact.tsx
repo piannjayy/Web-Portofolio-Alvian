@@ -12,16 +12,22 @@ const gridBg = {
 export default function Contact() {
   const sectionVariants: Variants = {
     hidden: {},
-    visible: { transition: { staggerChildren: 0.08 } },
+    visible: { transition: { staggerChildren: 0.07 } },
   }
 
   const fadeUp: Variants = {
     hidden:  { opacity: 0, y: 32 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  }
+
+  // Link rows animate like cards in Projects
+  const rowVariants: Variants = {
+    hidden:  { opacity: 0, y: 24, scale: 0.97 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
   }
 
   const handleDownloadCV = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const cvExists = false
+    const cvExists = true 
     if (!cvExists) {
       e.preventDefault()
       alert("CV masih nonaktif yahh!")
@@ -47,8 +53,8 @@ export default function Contact() {
 
         {/* ── TOP DIVIDER ── */}
         <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileInView={{ scaleX: 1, opacity: 1 }}
           viewport={{ once: false }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           className="w-full h-px bg-gradient-to-r from-transparent via-[#526D82]/30 to-transparent origin-left mb-16"
@@ -109,13 +115,16 @@ export default function Contact() {
             </div>
 
             {/* ── LINKS ── */}
-            <div className="flex flex-col">
+            <motion.div className="flex flex-col" variants={sectionVariants}>
 
-              {/* Email — group lives ON the <a> */}
-              <a
+              {/* Email */}
+              <motion.a
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=jalulajula696@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                variants={rowVariants}
+                whileHover={{ x: 4 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="group relative flex items-center justify-between
                   border-t border-[#526D82]/15 dark:border-[#9DB2BF]/10
                   hover:border-[#526D82]/35 dark:hover:border-[#9DB2BF]/25
@@ -155,13 +164,16 @@ export default function Contact() {
                   className="absolute bottom-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
                   style={{ background: 'linear-gradient(to right, #526D82, rgba(82,109,130,0.15), transparent)' }}
                 />
-              </a>
+              </motion.a>
 
               {/* Download CV */}
-              <a
+              <motion.a
                 href="/cv-alvian-aditya.pdf"
                 onClick={handleDownloadCV}
                 download
+                variants={rowVariants}
+                whileHover={{ x: 4 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="group relative flex items-center justify-between
                   border-t border-b border-[#526D82]/15 dark:border-[#9DB2BF]/10
                   hover:border-[#526D82]/35 dark:hover:border-[#9DB2BF]/25
@@ -197,9 +209,9 @@ export default function Contact() {
                   className="absolute bottom-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
                   style={{ background: 'linear-gradient(to right, #9DB2BF, rgba(157,178,191,0.15), transparent)' }}
                 />
-              </a>
+              </motion.a>
 
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 

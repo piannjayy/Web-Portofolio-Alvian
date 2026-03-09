@@ -18,9 +18,19 @@ const socials = [
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
-  const footerVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } },
+  const sectionVariants: Variants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.07 } },
+  }
+
+  const fadeUp: Variants = {
+    hidden:  { opacity: 0, y: 32 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  }
+
+  const itemVariants: Variants = {
+    hidden:  { opacity: 0, y: 24, scale: 0.97 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
   }
 
   return (
@@ -32,13 +42,13 @@ export default function Footer() {
         className="relative z-10 max-w-6xl mx-auto px-6 py-8"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
-        variants={footerVariants}
+        viewport={{ once: false, margin: '-80px' }}
+        variants={sectionVariants}
       >
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4">
 
           {/* Brand */}
-          <div className="group cursor-default">
+          <motion.div variants={fadeUp} className="group cursor-default">
             <h2 className="font-black text-xl tracking-tighter text-[#27374D] dark:text-[#DDE6ED] uppercase leading-none group-hover:tracking-normal transition-all duration-500">
               AV.DEV<span className="text-[#526D82]/50 group-hover:text-[#526D82] dark:group-hover:text-[#9DB2BF] transition-colors duration-300">.</span>
             </h2>
@@ -51,16 +61,17 @@ export default function Footer() {
                 Fullstack Web Developer
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Social Links */}
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <motion.div variants={sectionVariants} className="flex flex-wrap gap-x-6 gap-y-2">
             {socials.map((social) => (
               <motion.a
                 key={social.name}
                 href={social.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                variants={itemVariants}
                 whileHover={{ y: -2 }}
                 className="group relative text-[10px] uppercase tracking-[0.25em] font-black
                   text-[#526D82]/50 dark:text-[#9DB2BF]/40
@@ -71,24 +82,24 @@ export default function Footer() {
                 <span className="absolute bottom-0 left-0 w-0 h-px bg-[#526D82]/50 dark:bg-[#9DB2BF]/40 group-hover:w-full transition-all duration-400" />
               </motion.a>
             ))}
-          </div>
+          </motion.div>
 
           {/* Copyright */}
-          <div className="flex flex-col md:items-end gap-1">
+          <motion.div variants={fadeUp} className="flex flex-col md:items-end gap-1">
             <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#526D82]/50 dark:text-[#9DB2BF]/40">
               © {currentYear} • Alvian Aditya
             </p>
             <p className="text-[9px] font-black uppercase tracking-[0.35em] text-[#526D82]/30 dark:text-[#9DB2BF]/25">
               Malang, ID
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom line */}
         <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileInView={{ scaleX: 1, opacity: 1 }}
+          viewport={{ once: false }}
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 h-px w-full bg-gradient-to-r from-transparent via-[#526D82]/20 dark:via-[#9DB2BF]/10 to-transparent origin-left"
         />
